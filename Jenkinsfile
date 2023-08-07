@@ -1,4 +1,9 @@
 pipeline {
+    agent any
+        tools {
+            maven 'maven_3.9.4'
+        }
+
 	stages {
 		stage ('Check Java Version') {
 			steps {
