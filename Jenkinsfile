@@ -5,7 +5,7 @@ pipeline {
 		maven 'mvn_3.9.4'
 	}
     stages {
-        node ('jenkins-slave-teamB')
+        node ('jenkins-slave-teamB') {
         stage('Code Compilation') {
             steps {
                 echo 'Code Compilation Is In Progress!'
@@ -26,4 +26,5 @@ pipeline {
             }
 		}
     }
+}
 }
