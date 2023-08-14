@@ -3,6 +3,8 @@ pipeline {
 	agent {
 		node {
 			lable 'jenkins-slave-B'
+		}
+	}
 	tools {
 		mavan 'mvn_3.9.4'
 	}
@@ -24,9 +26,7 @@ pipeline {
             steps {
                 echo 'Creating War Artifact!'
                 sh 'mvn clean package'
-                    }
-		        }
             }
-        }
+		}
     }
 }
