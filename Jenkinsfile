@@ -1,7 +1,7 @@
 pipeline {
 
     agent any
-    node ('jenkins-slave-teamB')
+    node ('jenkins-slave-teamB') {
     	tools {
 		maven 'mvn_3.9.4'
 	}
@@ -27,3 +27,5 @@ pipeline {
 		}
     }
 }
+}
+
