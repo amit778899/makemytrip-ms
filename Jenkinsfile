@@ -2,7 +2,7 @@ pipeline {
 
 	agent {
 		node {
-			lable 'jenkins-slave-teamB'
+			label 'jenkins-slave-teamB'
 		}
 	}
 	tools {
