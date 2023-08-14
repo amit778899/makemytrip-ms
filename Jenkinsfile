@@ -2,11 +2,11 @@ pipeline {
 
 	agent {
 		node {
-			lable 'jenkins-slave-B'
+			lable 'jenkins-slave-teamB'
 		}
 	}
 	tools {
-		mavan 'mvn_3.9.4'
+		maven 'mvn_3.9.4'
 	}
     stages {
         stage('Code Compilation') {
