@@ -1,5 +1,6 @@
 pipeline {
 
+    agent any
 	tools {
 		maven 'mvn_3.9.4'
 	}
