@@ -1,7 +1,7 @@
 pipeline {
 
 	tools {
-		mavan 'mavan_3.9.4'
+		maven 'maven_3.9.4'
 	}
     stages {
         stage('Code Compilation') {
