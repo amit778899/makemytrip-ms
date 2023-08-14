@@ -1,7 +1,7 @@
 pipeline {
 
-    agent any
-	tools {
+    agent jenkins-slave-teamB
+    	tools {
 		maven 'mvn_3.9.4'
 	}
     stages {
