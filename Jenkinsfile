@@ -1,9 +1,10 @@
 pipeline {
 
-    agent any
-    node ('jenkins-slave-teamB') {
-    	tools {
-		maven 'mvn_3.9.4'
+	agent {
+		node {
+			lable 'jenkins-slave-B'
+	tools {
+		mavan 'mvn_3.9.4'
 	}
     stages {
         stage('Code Compilation') {
@@ -23,9 +24,9 @@ pipeline {
             steps {
                 echo 'Creating War Artifact!'
                 sh 'mvn clean package'
+                    }
+		        }
             }
-		}
+        }
     }
 }
-}
-
