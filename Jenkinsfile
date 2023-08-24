@@ -77,7 +77,7 @@ pipeline {
         }
         stage('Delete images from  Jenkins') {
             steps {
-                sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+                sh 'docker rmi $(docker images -q)'
                 sh 'docker images'
             }
         }
