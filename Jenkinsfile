@@ -18,6 +18,12 @@ pipeline {
 				echo 'Code Compilation is Completed Successfully!'
             }
         }
+        stage('Code QA Execution') {
+             steps {
+                echo 'Amit Test case check in Progress!'
+                sh 'mvn clean test'
+             }
+        }
         stage('Code Package') {
             steps {
                 echo 'Creating War Artifact'
