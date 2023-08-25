@@ -75,6 +75,19 @@ pipeline {
               }
            }
         }
+        stage ('Upload the docker Image to Nexus') {
+        	steps {
+        		script {
+        			withCredentials([usernamePassword(credentialsId: 'nexuscred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        			sh 'docker login http://65.0.11.128:8085/repository/makemytrip-ms/ -u admin -p ${PASSWORD}'
+        			echo "Push Docker Image to Nexus : In Progress"
+        			sh 'docker tag makemytrip-ms 65.0.11.128:8085/makemytrip-ms:latest'
+        			sh 'docker push makemytrip-ms 65.0.11.128:8085/makemytrip-ms'
+        			echo "Push Docker Image to Nexus : Completed"
+        			}
+        		}
+        	}
+        }
         stage('Delete images from  Jenkins') {
             steps {
                 sh 'docker rmi -f $(docker images -q)'
