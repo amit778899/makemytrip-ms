@@ -42,7 +42,7 @@ pipeline {
             steps {
                 echo 'Docker Image Scanning Started'
                 sh 'java -version'
-                echo 'Docker Image Scanning Started'
+                echo 'Docker Image Scanning Completed'
             }
         }
         stage(' Docker push to Docker Hub') {
@@ -52,7 +52,7 @@ pipeline {
                  sh 'docker login docker.io -u amit778899 -p ${dockerhubCred}'
                  echo "Push Docker Image to DockerHub : In Progress"
                  sh 'docker push amit778899/makemytrip-ms:latest'
-                 echo "Push Docker Image to DockerHub : In Progress"
+                 echo "Push Docker Image to DockerHub : Completed"
                  }
               }
             }
