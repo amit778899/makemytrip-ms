@@ -57,37 +57,6 @@ pipeline {
               }
             }
         }
-        stage(' Docker Image Push to Amazon ECR') {
-           steps {
-              script {
-                 withDockerRegistry([credentialsId:'ecr:ap-south-1:ecr-credentials', url:"https://615277645636.dkr.ecr.ap-south-1.amazonaws.com/makemytrip-ms"]){
-                 sh """
-                 echo "List the docker images present in local"
-                 docker images
-                 echo "Tagging the Docker Image: In Progress"
-                 docker tag makemytrip-ms:latest 615277645636.dkr.ecr.ap-south-1.amazonaws.com/makemytrip-ms:latest
-                 echo "Tagging the Docker Image: Completed"
-                 echo "Push Docker Image to ECR : In Progress"
-                 docker push 615277645636.dkr.ecr.ap-south-1.amazonaws.com/makemytrip-ms:latest
-                 echo "Push Docker Image to ECR : Completed"
-                 """
-                 }
-              }
-           }
-        }
-        stage ('Upload the docker Image to Nexus') {
-        	steps {
-        		script {
-        			withCredentials([usernamePassword(credentialsId: 'nexuscred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        			sh 'docker login http://65.0.11.128:8085/repository/makemytrip-ms/ -u admin -p ${PASSWORD}'
-        			echo "Push Docker Image to Nexus : In Progress"
-        			sh 'docker tag makemytrip-ms 65.0.11.128:8085/makemytrip-ms:latest'
-        			sh 'docker push 65.0.11.128:8085/makemytrip-ms'
-        			echo "Push Docker Image to Nexus : Completed"
-        			}
-        		}
-        	}
-        }
         stage('Delete images from Jenkins') {
             steps {
                 sh 'docker rmi -f $(docker images -q)'
