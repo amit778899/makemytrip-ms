@@ -35,7 +35,7 @@ pipeline {
                 echo 'Starting Building Docker Image'
                 sh 'docker build -t amit778899/makemytrip-ms .'
                 sh 'docker build -t makemytrip-ms .'
-                sh 'docker tag makemytrip-ms:latest makemytrip-ms:${BUILD_NUMBER}'
+                sh 'docker tag amit778899/makemytrip-ms:latest amit778899/makemytrip-ms:${BUILD_NUMBER}'
                 echo 'Completed  Building Docker Image'
             }
         }
