@@ -51,12 +51,30 @@ pipeline {
                  withCredentials([string(credentialsId: 'dockerhubCred', variable: 'dockerhubCred')]){
                  sh 'docker login docker.io -u amit778899 -p ${dockerhubCred}'
                  echo "Push Docker Image to DockerHub : In Progress"
-                 sh 'docker push amit778899/makemytrip-ms:latest'
+                 sh 'docker push amit778899/makemytrip-ms:${BUILD_NUMBER}'
                  echo "Push Docker Image to DockerHub : Completed"
                  }
               }
             }
         }
+        stage(' Docker Image Push to Amazon ECR') {
+                   steps {
+                      script {
+                         withDockerRegistry([credentialsId:'ecr:ap-south-1:ecr-credentials', url:"https://615277645636.dkr.ecr.ap-south-1.amazonaws.com/makemytrip-ms"]){
+                         sh """
+                         echo "List the docker images present in local"
+                         docker images
+                         echo "Tagging the Docker Image: In Progress"
+                         docker tag makemytrip-ms:latest 615277645636.dkr.ecr.ap-south-1.amazonaws.com/makemytrip-ms:latest
+                         echo "Tagging the Docker Image: Completed"
+                         echo "Push Docker Image to ECR : In Progress"
+                         docker push 615277645636.dkr.ecr.ap-south-1.amazonaws.com/makemytrip-ms:latest
+                         echo "Push Docker Image to ECR : Completed"
+                         """
+                         }
+                      }
+                   }
+                }
         stage('Delete images from Jenkins') {
             steps {
                 sh 'docker rmi -f $(docker images -q)'
